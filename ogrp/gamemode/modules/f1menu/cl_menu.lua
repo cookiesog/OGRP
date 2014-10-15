@@ -9,7 +9,7 @@ local function DrawFancyRectangle( x, y, Wide, Tall, Color )
 end
 
 function F1Menu()
-    local w = 1920
+    local w = 610
     local h = 100
 
 	local f = vgui.Create("DFrame")
@@ -56,7 +56,7 @@ end
 local Button2 = vgui.Create("DButton", f)
 Button2:SetParent( f )
 Button2:SetText( "Attributes" )
-Button2:SetPos(1065, 5)
+Button2:SetPos(5, 5)
 Button2:SetSize( 200, 90)
 
 Button2.DoClick = function ( btn )
@@ -78,7 +78,7 @@ end
 local Button3 = vgui.Create("DButton", f)
 Button3:SetParent( f )
 Button3:SetText( "Crafting" )
-Button3:SetPos(655, 5)
+Button3:SetPos(400, 5)
 Button3:SetSize( 200, 90)
 Button3.DoClick = function ( btn )
 f:Close()
