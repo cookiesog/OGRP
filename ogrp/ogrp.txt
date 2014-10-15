@@ -1,0 +1,6 @@
+"OGRP"
+{
+	"base"		"sandbox"
+	"title"		"OGRP"
+	"menusystem"	"1"
+}

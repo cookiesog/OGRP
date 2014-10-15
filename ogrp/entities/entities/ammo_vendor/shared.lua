@@ -1,0 +1,9 @@
+ENT.Base = "base_entity"
+ENT.Type = "ai"
+ENT.AutomaticFrameAdvance = true
+ENT.PrintName = "Ammo Vendor"
+ENT.Author = "Drakanouhai"
+ENT.Category = "Drakanouhai"
+ENT.Instructions = "" 
+ENT.Spawnable = true
+ENT.AdminSpawnable = true
