@@ -16,7 +16,7 @@ surface.CreateFont( "DrakZHUD4",
 	{
 	
 		font = "Roboto",
-		size = 16,
+		size = 20,
 		weight = 400
 	
 	}
@@ -108,12 +108,14 @@ local Health = 0
 local function DrawBlood()
 	local bloodVariable = LocalPlayer():GetNWInt( "blood" ) / 100
 
-	DrawFancyRectangle( 8, ScrH() - ( 25), 480, 18, Color( 152, 0, 0, 64 ) )
+	DrawFancyRectangle( 8, ScrH() - ( 172), 480, 18, Color( 152, 0, 0, 64 ) )
 	
-	DrawFancyRectangle( 8, ScrH() - ( 25), bloodVariable * 4.80, 18, Color( 152, 0, 0, 255 ) )
+	DrawFancyRectangle( 8, ScrH() - ( 172), bloodVariable * 4.80, 18, Color( 152, 0, 0, 255 ) )
 	local drawbloodVariable = LocalPlayer():GetNWInt( "blood" )
-	draw.DrawText( "Blood: "..drawbloodVariable.."L", "DrakZHUD5",280,ScrH() - (25), Color( 228, 228, 228, 255 ), 2, 1 )
+	draw.DrawText( "Blood: "..drawbloodVariable.."L", "DrakZHUD5",280,ScrH() - (172), Color( 228, 228, 228, 255 ), 2, 1 )
 end
+
+
 
 --[[ 
 function DrawThirst()
@@ -141,20 +143,34 @@ function DrawBleeding()
     local isBleeding = LocalPlayer():GetNWBool( "isBleeding" )
 
 	if(isBleeding)then
-        DrawFancyRectangle( 32, ScrH() - ( 55) , 100 * 3.20, 24, Color( 255, 100, 100, 255 ) )
-        draw.DrawText( "You are bleeding!", "DrakZHUD5", math.Clamp( 16 + 100 * 1.60, 96, 16 + 100 * 1.60 ), ScrH() - ( 55 ), Color( 228, 228, 228, 255 ), 2, 1 )
+		DrawFancyRectangle( 8, ScrH() - ( 197), 480, 18, Color( 255, 100, 100, 255 ) )
+        draw.DrawText( "You are bleeding!", "DrakZHUD5", math.Clamp( 16 + 100 * 1.60, 96, 16 + 100 * 1.60 ), ScrH() - ( 197 ), Color( 228, 228, 228, 255 ), 2, 1 )
 	end
 end
 
 local function DrawInfo()
 	local money = LocalPlayer():GetNWInt( "cash" )
 	local humanity = LocalPlayer():GetNWInt( "humanity" )
+	local blood = LocalPlayer():GetNWInt( "blood" )
+	local bloodstring = "Healthy"
 	surface.SetFont( "DrakZHUD3" )
-
-
-	draw.DrawText( "Humanity: You have "..humanity.." humanity left.", "DrakZHUD4", 32, ScrH() - 154, Color( 228, 228, 228, 255 ), 0, 1 )
-	draw.DrawText( "Money: $"..money, "DrakZHUD4", 32, ScrH() - 130, Color( 214, 214, 214, 255 ), 0, 1 )
+  
+	DrawFancyRectangle( 8, ScrH() - ( 150), 480, 140, Color( 0, 0, 0, 170 ) )
+	draw.DrawText( "Money: $"..money, "DrakZHUD4", 42, ScrH() - 130, Color( 214, 214, 214, 255 ), 0, 1 )
 	
+	if(blood >= 9000) then
+	    bloodstring = "Healthy"
+	elseif(blood >= 7000)then
+	    bloodstring = "Mildly Injured"
+	elseif(blood >= 5000)then
+	    bloodstring = "Badly Injured"
+	elseif(blood >= 3000) then
+	    bloodstring = "Severely Injured"
+	end
+	draw.DrawText( "Health: "..bloodstring, "DrakZHUD4", 42, ScrH() - 110, Color( 214, 214, 214, 255 ), 0, 1 )	
+    draw.DrawText( "Organisation: null", "DrakZHUD4", 42, ScrH() - 90, Color( 214, 214, 214, 255 ), 0, 1 )
+	draw.DrawText( "Stamina: 100", "DrakZHUD4", 42, ScrH() - 70, Color( 214, 214, 214, 255 ), 0, 1 )	
+	draw.DrawText( "Playtime: null", "DrakZHUD4", 42, ScrH() - 50, Color( 214, 214, 214, 255 ), 0, 1 )		
 end
 
 local function DrawHUD()
