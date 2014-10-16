@@ -79,7 +79,26 @@ function GM:EntityTakeDamage( ent, inflictor, attacker, amount )
 		end 
 	end
 end
-
+--[[
+function GM:EntityTakeDamage( ent, inflictor, attacker, amount )
+	if ( ent:IsPlayer() ) then ent:SetHealth(100) end
+	local rando = math.random(1, 5)
+	if ( ent:IsPlayer() ) then
+		ent:BloodTake( math.random(50,250) )
+		if rando == 2 then
+			local randomBleedTime = math.random(15, 120)
+			timer.Create( "bleed_timer", 1, randomBleedTime, function()	
+			    ent:SetPData
+				ent:BloodTake( math.random(1, 15) )
+				ent:SetNWBool("isBleeding", true)
+			    timer.Simple(randomBleedTime, function()
+	                ent:SetNWBool("isBleeding", false)
+			    end)
+			end)
+		end 
+	end
+end
+]]--
 
 
  

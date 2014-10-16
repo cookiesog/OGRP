@@ -2,6 +2,7 @@
 	© 2014 Overload-Gaming.com do not share, re-distribute or modify
 	without permission of its author - Cookies@overload-gaming.com.
 --]]
+local developmentMode = true
 
 AddCSLuaFile( 'shared.lua' )
 AddCSLuaFile( 'cl_init.lua' )
@@ -10,8 +11,30 @@ util.AddNetworkString( "KEY_E" )
 
 include( 'shared.lua' )
 
--- Set this to true to allow console output!
-local developmentMode = true
+function PlayerSpawned( ply )
+	ply:ChatPrint( "Enjoy your new life!" )
+end
+
+function Loadout( ply )
+	ply:Give("weapon_fists")
+	ply:Give("weapon_physgun")
+    ply:SelectWeapon("weapon_fists")
+ 
+	return false
+end
+
+hook.Add("PlayerLoadout", "Loadout", Loadout)
+hook.Add("PlayerSpawn", "Spawned", PlayerSpawned)
+
+--[[
+Do not edit below this point
+Do not edit below this point
+Do not edit below this point
+Do not edit below this point
+Do not edit below this point
+Do not edit below this point
+Do not edit below this point
+--]]
 
 if(developmentMode)then
 print("")
@@ -85,48 +108,5 @@ for _, folder in SortedPairs(folders, true) do
 	    end
 	end
 end
-
-function PlayerSpawned( ply )
-	ply:ChatPrint( "Enjoy your new life!" )
-	ply:MoneyCreate()
-	ply:ThirstCreate()
-	ply:HungerCreate()
-	timer.Start("thirst_timer")
-	timer.Start("hunger_timer")
-	local currentChar = tonumber(ply:GetPData( "char" ) )
-	print(currentChar)
-end
-hook.Add("PlayerSpawn", "Spawned", PlayerSpawned)
-
-function Loadout( ply )
-	ply:Give("weapon_fists")
-	ply:Give("weapon_physgun")
-    ply:SelectWeapon("weapon_fists")
- 
-	return false
-end
-hook.Add( "PlayerLoadout", "Loadout", Loadout)
-
-function FirstSpawn( ply )
-	local current = tonumber(ply:GetPData( "cash" ) )
-	ply:MoneySet( current )
---	ply:DatabaseCheck()
-	ply:DatabaseSetup()
-end
-hook.Add( "PlayerInitialSpawn", "playerInitialSpawn", FirstSpawn )
-
-function playerDies( victim, weapon, killer )
-	local current = tonumber(victim:GetPData( "cash" ) )
-	victim:MoneySet( current )
-end
-hook.Add( "PlayerDeath", "playerDeathTest", playerDies )
-
-function GM:PlayerDisconnected(ply)
-	ply:DatabaseDisconnect()
-end
-
-hook.Add( "OnReloaded", "Test", function()
-    print( "test" )
-end )
 
 

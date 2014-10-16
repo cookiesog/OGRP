@@ -10,13 +10,17 @@ end
 hook.Add("PlayerSpawn", "Spawned", PlayerSpawned)
 
 function FirstSpawn( ply )
-	PrintMessage( HUD_PRINTTALK, "Player ".. ply:Nick() .." has just joined the struggle against the undead."  )
+	PrintMessage( HUD_PRINTTALK, "Player ".. ply:Nick() .." has joined the server."  )
 end
 hook.Add( "PlayerInitialSpawn", "playerInitialSpawn", FirstSpawn )
 
 function playerDies( victim, weapon, killer )
 	local plyKiller = killer:GetName()
-	PrintMessage( HUD_PRINTTALK, "Player ".. victim:Nick() .." has died."  )
+	PrintMessage( HUD_PRINTTALK, "Player [".. victim:Nick() .."] has died."  )
+	if(!plyKiller == nil) then
 	victim:ChatPrint( "You were killed by "..plykiller.."!" )
+	else
+	victim:ChatPrint( "You have died!")
+	end
 end
 hook.Add( "PlayerDeath", "playerDeathTest", playerDies )
