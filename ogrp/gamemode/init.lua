@@ -2,39 +2,26 @@
 	© 2014 Overload-Gaming.com do not share, re-distribute or modify
 	without permission of its author - Cookies@overload-gaming.com.
 --]]
+OGRP = OGRP or GM
+
 local developmentMode = true
 
 AddCSLuaFile( 'shared.lua' )
 AddCSLuaFile( 'cl_init.lua' )
-
 util.AddNetworkString( "KEY_E" )
-
 include( 'shared.lua' )
 
-function PlayerSpawned( ply )
+function OGRP:PlayerSpawn( ply )
 	ply:ChatPrint( "Enjoy your new life!" )
 end
 
-function Loadout( ply )
+function OGRP:PlayerLoadout( ply )
 	ply:Give("weapon_fists")
 	ply:Give("weapon_physgun")
     ply:SelectWeapon("weapon_fists")
  
 	return false
 end
-
-hook.Add("PlayerLoadout", "Loadout", Loadout)
-hook.Add("PlayerSpawn", "Spawned", PlayerSpawned)
-
---[[
-Do not edit below this point
-Do not edit below this point
-Do not edit below this point
-Do not edit below this point
-Do not edit below this point
-Do not edit below this point
-Do not edit below this point
---]]
 
 if(developmentMode)then
 print("")
