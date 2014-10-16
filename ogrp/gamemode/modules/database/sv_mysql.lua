@@ -61,7 +61,7 @@ end
 function MySQL_LoadData ( ply )
 	steam_id = sql.QueryValue("SELECT steam_id FROM player_data WHERE steam_id = '"..steamID.."'")
 	cash = sql.QueryValue("SELECT cash FROM player_data WHERE steam_id = '"..steamID.."'")
-	ply:SetNWString("unique_id", steam_id)
+	ply:SetNWString("steam_id", steam_id)
 	ply:SetNWInt("cash", cash)
 end
 
