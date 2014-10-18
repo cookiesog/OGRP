@@ -3,8 +3,9 @@ OGRP
 
 Feature Completion:
 
-Blood (needs overhaul)
-Basic HUD (not finished)
+Blood - Complete
+Basic HUD - Complete
+Organisations - 60%
 Inventory (not finished)
 Crafting (not started)
 Attributes (not started)
