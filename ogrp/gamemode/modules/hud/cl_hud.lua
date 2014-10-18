@@ -160,7 +160,7 @@ local function DrawInfo()
 	    bloodstring = "Mildly Injured"
 	elseif(blood >= 5000)then
 	    bloodstring = "Badly Injured"
-	elseif(blood >= 3000) then
+   elseif(blood >= 3000) then
 	    bloodstring = "Severely Injured"
 	end	
 	

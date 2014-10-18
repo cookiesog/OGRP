@@ -17,12 +17,8 @@ end
 
 function OGRP:PlayerLoadout( ply )
 	ply:Give("weapon_fists")
-	ply:Give("weapon_gravgun")
+	ply:Give("weapon_physgun")
     ply:SelectWeapon("weapon_fists")
-	
-    if(ply:GetUserGroup() == "VIP" or ply:IsAdmin()) then 
-    	ply:Give("weapon_physgun")
-    end
  
 	return false
 end

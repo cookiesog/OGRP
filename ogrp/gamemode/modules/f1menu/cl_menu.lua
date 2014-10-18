@@ -8,6 +8,21 @@ local function DrawFancyRectangle( x, y, Wide, Tall, Color )
 	surface.SetDrawColor( 0, 0, 0, Color.a / 2 )
 end
 
+local GradientU = surface.GetTextureID("vgui/ogrp/glass.vtf" )
+
+local function DrawEvenFancierRectangle( x, y, Wide, Tall, Color )
+
+	draw.RoundedBox( 0, x, y, Wide, Tall, Color )
+
+	surface.SetDrawColor( 255, 255, 255, Color.a - 251 )
+	surface.DrawOutlinedRect( x + 1, y + 1, Wide - 2, Tall - 2 )
+
+	surface.SetDrawColor( 0, 0, 0, Color.a / 2 )
+	surface.SetTexture( GradientU )
+	surface.DrawTexturedRect( x, y, Wide, Tall )
+
+end
+
 function F1Menu()
     local w = 610
     local h = 100
@@ -22,7 +37,7 @@ function F1Menu()
     f:MakePopup()
     f.Paint = function()
         ---draw.RoundedBox(0,0,0,self:GetWide(), self:GetTall(), Color(255,255,255,255))
-        draw.RoundedBox(0,0,0,f:GetWide(), 800, Color(0,0,0,170))
+		DrawFancyRectangle(0,0,f:GetWide(), 800, Color(0,0,0,170))
     end
 
 local ButtonColor = {} 
