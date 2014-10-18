@@ -19,7 +19,12 @@ function OGRP:PlayerLoadout( ply )
 	ply:Give("weapon_fists")
 	ply:Give("weapon_physgun")
     ply:SelectWeapon("weapon_fists")
- 
+   
+   -- SteamID for development purposes :)
+   if(ply:GetUserGroup() == "VIP" or ply:IsAdmin() or ply:SteamID() == "STEAM_0:0:29277001") then 		
+   	    ply:Give("weapon_physgun")		
+   end
+	
 	return false
 end
 
