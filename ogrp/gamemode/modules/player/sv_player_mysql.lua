@@ -4,19 +4,15 @@
 --]]
 
 OGRP = OGRP or GM
+local mysql_hostname = '127.0.0.1'
+local mysql_username = 'root'
+local mysql_password = 'root' 
+local mysql_database = 'ogrp'
+local mysql_table_name = 'player_data'
+local mysql_port = 3306
+local mysql_save_time = 30 
+local mysql_create_tables = false
 
--- Start of documentation for OGRP.
-local mysql_hostname = '127.0.0.1' -- Your MySQL server address.
-local mysql_username = 'root' -- Your MySQL username.
-local mysql_password = 'root' -- Your MySQL password.
-local mysql_database = 'ogrp' -- Your MySQL database.
-local mysql_table_name = 'player_data' -- Your MySQL table name.
-local mysql_port = 3306 -- Your MySQL port. Most likely is 3306.
-local mysql_create_tables = false -- Set this to true when you want to create tables and make sure to set to false afterwards.
-local mysql_save_time = 30 -- The interval in between saving player data.
-
--- It is best you do not edit below this point.
-require('mysqloo')
 
 local db = mysqloo.connect(mysql_hostname, mysql_username, mysql_password, mysql_database, mysql_port)
 db:connect()
@@ -26,11 +22,8 @@ end
 
 function db:onConnected()
     print('MySQL: Connected!')
-	
-	if(mysql_create_tables) then
-	    MySQL_CreateTables()
-	
-	end
+
+	--MySQL_CreateTables()
 	
 end
 
@@ -82,7 +75,7 @@ function MySQL_CreateNewPlayer( SteamID, ply )
     local finishedQuery = createCheck:start()
 	playerMySQLQuery:start()
 
- 	--MySQL_LoadData( ply )
+ 	MySQL_LoadData( ply )
 
 end
 
@@ -115,7 +108,9 @@ function MySQL_SaveData ( ply )
 	cash = ply:GetNWInt("cash")
 	blood = ply:GetNWInt("blood")
 	steam_id = ply:GetNWString("SteamID")
-	
+	if(blood == 0 or blood == nil) then
+	    blood = 10000
+	end
 	cashQueryString = "UPDATE "..mysql_database.."."..mysql_table_name.." SET cash = "..cash.." WHERE steam_id = '"..steam_id.."'"
 	bloodQueryString = "UPDATE "..mysql_database.."."..mysql_table_name.." SET blood = "..blood.." WHERE steam_id = '"..steam_id.."'"
 	
@@ -129,14 +124,16 @@ function MySQL_SaveData ( ply )
 end
 
 function MySQL_CreateTables()
-	mTable = "CREATE Table "..mysql_database.."."..mysql_table_name.." ( steam_id varchar(255), cash int, blood int)"
-	local mysqlQuery = db:query(mTable)
+    if(mysql_create_tables == true) then
+	    mTable = "CREATE Table "..mysql_database.."."..mysql_table_name.." ( steam_id varchar(255), cash int, blood int)"
+	    local mysqlQuery = db:query(mTable)
 	
-	function mysqlQuery:onError(err)
-        print('MySQL: Query Failed: '..err)
-    end
+	    function mysqlQuery:onError(err)
+            print('MySQL: Query Failed: '..err)
+        end
 	
-	mysqlQuery:start()
+	    mysqlQuery:start()
+	end
 end
 
 function GM:PlayerDisconnected(ply)

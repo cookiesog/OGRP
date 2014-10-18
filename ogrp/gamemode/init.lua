@@ -4,6 +4,7 @@
 --]]
 OGRP = OGRP or GM
 
+require('mysqloo')
 local developmentMode = true
 
 AddCSLuaFile( 'shared.lua' )
