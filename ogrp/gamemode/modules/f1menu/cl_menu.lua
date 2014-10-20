@@ -8,21 +8,6 @@ local function DrawFancyRectangle( x, y, Wide, Tall, Color )
 	surface.SetDrawColor( 0, 0, 0, Color.a / 2 )
 end
 
-local GradientU = surface.GetTextureID("vgui/ogrp/glass.vtf" )
-
-local function DrawEvenFancierRectangle( x, y, Wide, Tall, Color )
-
-	draw.RoundedBox( 0, x, y, Wide, Tall, Color )
-
-	surface.SetDrawColor( 255, 255, 255, Color.a - 251 )
-	surface.DrawOutlinedRect( x + 1, y + 1, Wide - 2, Tall - 2 )
-
-	surface.SetDrawColor( 0, 0, 0, Color.a / 2 )
-	surface.SetTexture( GradientU )
-	surface.DrawTexturedRect( x, y, Wide, Tall )
-
-end
-
 function F1Menu()
     local w = 605
     local h = 100
@@ -96,7 +81,7 @@ Button3:SetText( "Organisation" )
 Button3:SetPos(400, 5)
 Button3:SetSize( 200, 90)
 Button3.DoClick = function ( btn )
-f:Close()
+OrganisationMenu()
 end
 Button3.Paint = function()
 	DrawFancyRectangle( 0, 0, Button:GetWide(), Button:GetTall(), ButtonColor.butt3 )
@@ -112,3 +97,59 @@ end
 
 end
 concommand.Add("f1menu", F1Menu)
+
+function OrganisationMenu()
+local OrgMenu = vgui.Create("DFrame")
+OrgMenu:SetSize(500, 250)
+OrgMenu:Center()
+OrgMenu:SetTitle("Organisation Window")
+OrgMenu:SetDraggable(false)
+OrgMenu:SetSizable(false)
+OrgMenu:ShowCloseButton(true)
+OrgMenu:MakePopup() 
+OrgMenu.Paint = function()
+    draw.RoundedBox(4, 0, 0, OrgMenu:GetWide(), OrgMenu:GetTall(), Color(212,212,212,255))
+	draw.RoundedBox(2, 2, 2, OrgMenu:GetWide()-4, 21, Color(80,50,120,250))
+end
+
+local OrgCreate = vgui.Create("DButton", OrgMenu)
+OrgCreate:SetSize(235, 200)
+OrgCreate:SetPos(10, 35)
+OrgCreate:SetText("Create Organisation")
+OrgCreate.DoClick = function()
+Derma_StringRequest( 
+ "Create Organisation", 
+ "Input a name for your new organisation.",
+ "",
+ function( text ) 
+       print( "Sending text to server" )
+       net.Start( "CreateOrganisation" )
+           net.WriteString( text )
+       net.SendToServer()
+	
+   end,
+ function( text ) print( "Cancelled input" ) end,
+ "Create Organisation.",
+ "Nevermind."
+ )
+end
+OrgCreate.Paint = function()
+    draw.RoundedBox(4, 0, 0, OrgCreate:GetWide(), OrgCreate:GetTall(), Color(255,255,255,220))
+end
+
+local OrgJoin = vgui.Create("DButton", OrgMenu)
+OrgJoin:SetSize(230, 200)
+OrgJoin:SetPos(255, 35)
+OrgJoin:SetText("Join Organisation")
+OrgJoin.DoClick = function()
+
+end
+OrgJoin.Paint = function()
+    draw.RoundedBox(4, 0, 0, OrgJoin:GetWide(), OrgJoin:GetTall(), Color(255,255,255,220))
+end
+
+
+end
+
+
+	

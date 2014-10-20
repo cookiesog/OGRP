@@ -44,6 +44,14 @@ function MySQL_CreateTables()
 	
 end
 
+util.AddNetworkString( "CreateOrganisation" )
+
+net.Receive( "CreateOrganisation", function( len, ply )
+    
+	ply:MySQL_OrganisationExistsThenCreate(ply, net.ReadString())
+     
+end )
+
 function Organisation:MySQL_OrganisationExistsThenCreate ( ply, OrgName )
     orgname = OrgName
 	Data = "SELECT * FROM "..mysql_database.."."..mysql_table_name.." WHERE name = '"..orgname.."'"
@@ -58,7 +66,7 @@ function Organisation:MySQL_OrganisationExistsThenCreate ( ply, OrgName )
             print("Organisation exists, cannot create.")	
 	    else
 		    print("Debug:CreateNewOrganisation")
-		    MySQL_CreateNewOrganisation( fplayer, orgname )	
+		    ply:MySQL_CreateNewOrganisation( fplayer, orgname )	
 	    end
 	end
 	
