@@ -5,7 +5,7 @@
 OGRP = OGRP or GM
 
 require('mysqloo')
-local developmentMode = true
+local developmentMode = false
 
 AddCSLuaFile( 'shared.lua' )
 AddCSLuaFile( 'cl_init.lua' )
@@ -22,9 +22,9 @@ function OGRP:PlayerLoadout( ply )
     ply:SelectWeapon("weapon_fists")
    
    -- SteamID for development purposes :)
-   if(ply:GetUserGroup() == "VIP" or ply:IsAdmin() or ply:SteamID() == "STEAM_0:0:29277001") then 		
+  -- if(ply:GetUserGroup() == "VIP" or ply:IsAdmin() or ply:SteamID() == "STEAM_0:0:29277001") then 		
    	    ply:Give("weapon_physgun")		
-   end
+  -- end
 	
 	return false
 end

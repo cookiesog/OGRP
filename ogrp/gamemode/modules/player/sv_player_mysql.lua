@@ -3,7 +3,6 @@
 	without permission of its author - Cookies@overload-gaming.com.
 --]]
 
-OGRP = OGRP or GM
 local mysql_hostname = '127.0.0.1'
 local mysql_username = 'root'
 local mysql_password = 'root' 
@@ -11,27 +10,33 @@ local mysql_database = 'ogrp'
 local mysql_table_name = 'player_data'
 local mysql_port = 3306
 local mysql_save_time = 30 
-local mysql_create_tables = true
+local mysql_create_tables = false
 
 local db = mysqloo.connect(mysql_hostname, mysql_username, mysql_password, mysql_database, mysql_port)
 db:connect()
 
-function OGRP:Initialize()
-end
-
 function db:onConnected()
-    print('MySQL: Connected!')
+    print('Player MySQL: Connected!')
 
-	MySQL_CreateTables()
 	
+	if(mysql_create_tables) then 
+	    mTable = "CREATE Table "..mysql_database.."."..mysql_table_name.." ( steam_id varchar(255), cash int, blood int, organisation varchar(255))"
+	    local mysqlQuery = db:query(mTable)
+	
+        function mysqlQuery:onError(err)
+            print('MySQL: Query Failed: '..err)
+        end
+	
+	    mysqlQuery:start()
+	end
+
 end
 
 function db:onConnectionFailed(err)
     print('MySQL: Connection Failed, please check your settings: ' .. err)
 end
 
-function OGRP:PlayerInitialSpawn( ply )
-	
+function GM:PlayerInitialSpawn( ply )
 	timer.Create("Delay", 1, 1, function()
 		SteamID = ply:SteamID()
 		ply:SetNWString("SteamID", SteamID)
@@ -39,7 +44,6 @@ function OGRP:PlayerInitialSpawn( ply )
 	end)
 	
 	timer.Create("MySQL_SaveData", mysql_save_time, 0, function() MySQL_SaveData( ply ) end)
-	
 end
 
 function MySQL_PlayerExists ( ply )
@@ -112,7 +116,7 @@ function MySQL_SaveData ( ply )
 	steam_id = ply:GetNWString("SteamID")
 	
 	if(blood == 0 or blood == nil) then
-	    blood = 10000
+	    ply:SetNWInt("blood", 10000)
 	end
 	
 	cashQueryString = "UPDATE "..mysql_database.."."..mysql_table_name.." SET cash = "..cash.." WHERE steam_id = '"..steam_id.."'"
@@ -127,20 +131,7 @@ function MySQL_SaveData ( ply )
 	bloodQuery:start()
 	organisationQuery:start()
 	
-	print("[SAVE] Steam ID: "..steam_id.." Money: $"..cash.." Blood: "..blood.."L".." Organisation: "..organisationQuery)
-end
-
-function MySQL_CreateTables()
-    --if(mysql_create_tables == true) then
-	    mTable = "CREATE Table "..mysql_database.."."..mysql_table_name.." ( steam_id varchar(255), cash int, blood int, organisation varchar(255))"
-	    local mysqlQuery = db:query(mTable)
-	
-	    function mysqlQuery:onError(err)
-            print('MySQL: Query Failed: '..err)
-        end
-	
-	    mysqlQuery:start()
-	--end
+	print("[SAVE] Steam ID: "..steam_id.." Money: $"..cash.." Blood: "..blood.."L")
 end
 
 function GM:PlayerDisconnected(ply)
