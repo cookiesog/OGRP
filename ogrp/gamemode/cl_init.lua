@@ -1,7 +1,11 @@
+--[[
+	© 2014 Overload-Gaming.com do not share, re-distribute or modify
+	without permission of its author - Cookies@overload-gaming.com.
+--]]
+
 include( 'shared.lua' )
 
-
--- [[ Including all the modules and plugins ]] --
+ogrp = ogrp or GM
 
 local fol = GM.FolderName.."/gamemode/modules/"
 local files, folders = file.Find(fol .. "*", "LUA")
@@ -20,6 +24,7 @@ for _, folder in SortedPairs(folders, true) do
 		include(fol.. folder .. "/" ..File)
 	end
 end
+
 
 local fol = GM.FolderName.."/gamemode/plugins/"
 local files, folders = file.Find(fol .. "*", "LUA")

@@ -1,3 +1,8 @@
+--[[
+	© 2014 Overload-Gaming.com do not share, re-distribute or modify
+	without permission of its author - Cookies@overload-gaming.com.
+--]]
+
 local inventory = {}
 
 local function InventoryReceive( inventory_table )

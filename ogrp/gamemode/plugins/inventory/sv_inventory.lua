@@ -2,8 +2,6 @@
 	© 2014 Overload-Gaming.com do not share, re-distribute or modify
 	without permission of its author - Cookies@overload-gaming.com.
 --]]
-OGRP = OGRP or GM
-
 local ply = FindMetaTable("Player")
 -- local dataFolder = "server/ogrp/inventory_data/"
 
@@ -116,13 +114,13 @@ function ply:InventoryGetValue( name )
 end
 
 -- When a player's SteamID is authorized by VAC servers it will initalize and create/load inventory.
-function OGRP:PlayerAuthed(ply, steamID, uniqueID)
+function ogrp:PlayerAuthed(ply, steamID, uniqueID)
    ply:InventoryInitialize()
 
 end
 
 -- If a player disconnects, save their inventory.
-function OGRP:PlayerDisconnected( ply )
+function ogrp:PlayerDisconnected( ply )
    self:InventorySave()
 end
 
