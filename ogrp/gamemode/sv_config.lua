@@ -1,5 +1,5 @@
 --[[
-	© 2014 Overload-Gaming.com do not share, re-distribute or modify
+	Â© 2014 Overload-Gaming.com do not share, re-distribute or modify
 	without permission of its author - Cookies@overload-gaming.com.
 --]]
 
@@ -18,5 +18,5 @@ ogrp.config.dbOrganisation = "organisation_data"
 ogrp.config.dbCreateTables = true
 
 -- Shared data
-ogrp.config.jumpPower = 128
+
 
