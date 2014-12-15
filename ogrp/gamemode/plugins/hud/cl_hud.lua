@@ -28,6 +28,18 @@ surface.CreateFont( "ogrpHUD4",
 	
 )
 
+surface.CreateFont( "ogrpHUD22",
+
+	{
+	
+		font = "Segoe UI",
+		size = 32,
+		weight = 400
+	
+	}
+	
+)
+
 surface.CreateFont( "ogrpHUD5",
 
 	{
@@ -113,11 +125,11 @@ local Health = 0
 local function DrawBlood()
 	local bloodVariable = LocalPlayer():GetNWInt( "blood" ) / 100
 
-	DrawFancyRectangle( 8, ScrH() - ( 1070), 480, 18, Color( 152, 0, 0, 64 ) )
+	--DrawFancyRectangle( 8, ScrH() - ( 1070), 480, 18, Color( 152, 0, 0, 64 ) )
 	
-	DrawFancyRectangle( 8, ScrH() - ( 1070), bloodVariable * 4.80, 18, Color( 152, 0, 0, 255 ) )
+	--DrawFancyRectangle( 8, ScrH() - ( 1070), bloodVariable * 4.80, 18, Color( 152, 0, 0, 255 ) )
 	local drawbloodVariable = LocalPlayer():GetNWInt( "blood" )
-	draw.DrawText( "Blood: "..drawbloodVariable.."L", "ogrpHUD5",280,ScrH() - (1070), Color( 228, 228, 228, 255 ), 2, 1 )
+	--draw.DrawText( "Blood: "..drawbloodVariable.."L", "ogrpHUD5",280,ScrH() - (1070), Color( 228, 228, 228, 255 ), 2, 1 )
 end
 
 function DrawBleeding()

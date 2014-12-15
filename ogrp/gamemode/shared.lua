@@ -5,8 +5,8 @@
 DeriveGamemode("base")
 
 ogrp = ogrp or GM
-GM.Name = "ogrp"
-GM.Author = "Cookies"
+ogrp.Name = "ogrp"
+ogrp.Author = "Cookies"
 
 AddCSLuaFile( 'sh.config.lua' )
 include( 'sh_config.lua' )
