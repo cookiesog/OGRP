@@ -1,5 +1,5 @@
 --[[
-	© 2014 Overload-Gaming.com do not share, re-distribute or modify
+	Â© 2014 Overload-Gaming.com do not share, re-distribute or modify
 	without permission of its author - Cookies@overload-gaming.com.
 --]]
 
@@ -12,4 +12,5 @@ ogrp.config = ogrp.config or {}
 -- Config data
 ogrp.config.walkSpeed = 90
 ogrp.config.runSpeed = 275
-ogrp.config.saveInterval = 30
+ogrp.config.saveInterval = 300
+ogrp.config.jumpPower = 128
